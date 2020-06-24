@@ -1,10 +1,21 @@
 version: '2.2'
 services:
-    python:
-        build: .
+    frontend:
+        build: ./frontend
         volumes:
-            - ./elastic.py:/app/elastic.py
-            - ~/Code/python_indexer/meta.json:/app/meta.json
+            - ./frontend:/usr/src/app
+        ports:
+            - 8080:8080
+        networks:
+            - elastic
+    python:
+        build: ./python
+        depends_on:
+            - "es01"
+        volumes:
+            - ./python/elastic.py:/app/elastic.py
+            - ./python/meta.json:/app/meta.json
+        command: "python elastic.py"
         networks:
             - elastic
     es01:
