@@ -2,6 +2,8 @@ version: '2.2'
 services:
     frontend:
         build: ./frontend
+        depends_on: 
+            - "es01"
         volumes:
             - ./frontend:/usr/src/app
         ports:
