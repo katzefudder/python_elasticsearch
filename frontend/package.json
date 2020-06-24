@@ -1,0 +1,12 @@
+{
+  "name": "search-galleries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "flo@katzefudder.de",
+  "license": "ISC",
+  "dependencies": {
+    "elasticsearch": "^16.7.1",
+    "express": "^4.16.4"
+  }
+}
