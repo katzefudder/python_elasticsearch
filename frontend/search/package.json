@@ -5,7 +5,7 @@
     "author": "Florian Dehn <flo@katzefudder.de>",
     "main": "app.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node app.js"
     },
     "dependencies": {
         "axios": "^0.19.2",
