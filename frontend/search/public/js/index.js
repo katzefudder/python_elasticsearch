@@ -5,7 +5,6 @@ $(document).ready(function () {
     var $submitTitleSearchButton = $("#submitSearchTitle");
     var $logParagraph = $("#log").hide();
     
-    
     // The searchAPI object contains methods for each kind of request we'll make
     var searchAPI = {
         searchByTitle: function(title) {
@@ -16,8 +15,7 @@ $(document).ready(function () {
         }
       };
     
-    
-    var handleSubmitTitleSearch =  function(event) {
+    var handleSubmitTitleSearch = function(event) {
         event.preventDefault();
     
         var searchTerm = $titleSearchText.val().trim();
@@ -40,7 +38,6 @@ $(document).ready(function () {
         // Clear out search field
         $submitTitleSearchButton.val("");
       };
-    
     
       function makeTable(container, data) {
         var table = $("<table/>").addClass('table table-striped');
