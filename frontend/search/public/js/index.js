@@ -42,12 +42,16 @@ $(document).ready(function () {
 
   function handleResults(results) {
     var data = [];
-    data[0] = ["Foto", "Galerie", "Beschreibung", "Keywords"];
+    data[0] = ["Foto", "Galerie", "Beschreibung", "Original"];
     var hitsArray = results;
     hitsArray.forEach(function(photos) {
-      var imageUrl = photos._source['filename'].replace('/tmp/s3/presspix/', '');
+      // /tmp/s3/presspix/demo_customer/images/gallery_2/20200516_Fanclub_RT_003.jpg
+      var originalImage = photos._source['filename'].replace('/tmp/s3/presspix/', '');
+      var imageUrl = originalImage.replace('images/', 'thumbnails/max/');
       imageUrl = "https://presspix.s3.eu-central-1.amazonaws.com/" + imageUrl;
-      data.push([imageUrl, photos._source['headline'], photos._source['caption'], photos._source['keywords']]);
+      originalImage = "https://presspix.s3.eu-central-1.amazonaws.com/" + originalImage;
+
+      data.push([imageUrl, photos._source['headline'], photos._source['caption'], originalImage]);
     });
     return data;
   }
@@ -58,8 +62,12 @@ $(document).ready(function () {
         var row = $("<tr/>");
         $.each(r, function(colIndex, c) { 
             if (colIndex == 0 && rowIndex > 0) {
-              row.append($("<td><a href='"+c+"' download><img style='width: auto; height: 100px' src='"+c+"' /></a></td>"));
-            } else {
+              row.append($("<td><img style='width: auto; height: 100px' src='"+c+"' /></td>"));
+            } 
+            else if (colIndex == data[0].length - 1 && rowIndex > 0) {
+              row.append($("<td><a href='"+c+"' download target='blank'>download</a></td>"));
+            }
+            else {
               row.append($("<t"+(rowIndex == 0 ?  "h" : "d")+"/>").text(c));
             }
         });
